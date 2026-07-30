@@ -86,7 +86,7 @@ Open an issue here, or find me at
 
 This implements the LLM-wiki pattern: immutable raw sources under a maintained
 wiki layer, with a person curating. It aims at the
-[Open Knowledge Format](https://github.com/google/open-knowledge-format) where
+[Open Knowledge Format](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md) where
 it can, so a base is plain Markdown you own and can move anywhere.
 
 ## License
