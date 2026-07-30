@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Soulvant - a knowledge base for cyborgs</title>
+<meta name="description" content="A personal knowledge base that an AI assistant keeps current. You curate and decide what things mean; it does the reading, filing, and cross-linking.">
+<meta property="og:title" content="Soulvant - Intelligence for Cyborgs">
+<meta property="og:description" content="A personal knowledge base that an AI assistant keeps current.">
+<style>
+:root{
+  --bg:#05080a; --ink:#c3ddc9; --hot:#00ff5f; --amber:#ffb000; --dim:#3f6b4d;
+  --rule:#16301f;
+  --mono:"Cascadia Mono","JetBrains Mono","SF Mono",ui-monospace,Consolas,
+         "DejaVu Sans Mono",Menlo,monospace;
+}
+*{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:var(--mono); font-size:17px; line-height:1.72;
+  background-image:
+    radial-gradient(ellipse at 50% -10%,#0d2417 0%,transparent 55%),
+    repeating-linear-gradient(to bottom,
+      rgba(0,255,95,.022) 0px,rgba(0,255,95,.022) 1px,
+      transparent 1px,transparent 3px);
+  background-attachment:fixed;
+}
+.wrap{max-width:70ch; margin:0 auto; padding:0 24px 96px;}
+header{border-top:2px solid var(--hot); padding:44px 0 10px; margin-bottom:8px;}
+.slug{font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--dim);}
+h1{
+  color:var(--hot); font-size:2.9em; line-height:1.05; margin:.28em 0 .1em;
+  letter-spacing:.03em; text-shadow:0 0 30px rgba(0,255,95,.3);
+}
+.tag{color:var(--amber); font-size:1.05em; margin:0 0 2.6em;}
+h2{
+  color:var(--hot); font-size:1.28em; margin:2.6em 0 .7em;
+  padding-top:.9em; border-top:1px solid var(--rule);
+  text-shadow:0 0 18px rgba(0,255,95,.2);
+}
+h3{color:var(--amber); font-size:1em; font-weight:400; margin:1.9em 0 .4em;}
+p{margin:0 0 1.15em;}
+strong{color:var(--amber);}
+a{color:var(--hot); text-decoration:none; border-bottom:1px solid var(--dim);}
+a:hover{border-bottom-color:var(--hot); text-shadow:0 0 12px rgba(0,255,95,.5);}
+ul,ol{padding-left:0;list-style:none;margin:0 0 1.3em;}
+li{position:relative;padding-left:1.7em;margin:.45em 0;}
+ul li::before{content:">";position:absolute;left:0;color:var(--dim);}
+ol{counter-reset:n;}
+ol li{counter-increment:n;}
+ol li::before{content:counter(n,decimal-leading-zero);position:absolute;left:0;color:var(--dim);}
+code{background:#0b1410;border:1px solid var(--rule);color:var(--hot);
+     padding:.08em .35em;border-radius:2px;font-size:.92em;}
+pre{background:#0b1410;border:1px solid var(--rule);border-left:3px solid var(--hot);
+    padding:1em 1.2em;border-radius:2px;overflow-x:auto;}
+pre code{border:none;background:none;padding:0;}
+blockquote{margin:1.6em 0;padding:.2em 0 .2em 1.3em;border-left:2px solid var(--amber);
+           color:#e8f6ea;}
+.cta{
+  border:1px solid var(--hot); border-left-width:3px; background:#081410;
+  padding:1.4em 1.6em; margin:2.2em 0; border-radius:2px;
+}
+.cta h2{margin:0 0 .5em; border:none; padding:0; font-size:1.35em;}
+.btn{
+  display:inline-block; margin:.5em .6em .2em 0; padding:.6em 1.3em;
+  border:1px solid var(--hot); color:var(--hot); border-radius:2px;
+  letter-spacing:.05em; background:#0b1a12;
+}
+.btn:hover{background:var(--hot); color:#05080a; border-bottom-color:var(--hot);}
+.cur{display:inline-block;width:.5em;height:1em;background:var(--hot);
+     vertical-align:-.14em;margin-left:.2em;
+     animation:blink 1.06s steps(1) infinite;box-shadow:0 0 12px rgba(0,255,95,.7);}
+@keyframes blink{50%{opacity:0;}}
+footer{margin-top:4em;padding-top:1.4em;border-top:1px solid var(--rule);
+       color:var(--dim);font-size:.85em;}
+@media (max-width:620px){ body{font-size:16px;} h1{font-size:2.1em;} }
+@media (prefers-reduced-motion:reduce){ .cur{animation:none;} }
+</style></head>
+<body><div class="wrap">
+
+<header>
+  <div class="slug">soulvant</div>
+  <h1>A knowledge base<br>for cyborgs</h1>
+  <p class="tag">Intelligence for Cyborgs.<span class="cur"></span></p>
+</header>
+
+<p>You read, listen, and talk to people all day, and the parts worth keeping
+scatter: a line from an article, a point from a meeting, a thread you want to
+remember. Soulvant is the one place where all of it is gathered, organized, and
+connected for you, and kept current by an AI assistant that does the upkeep.</p>
+
+<p>You bring what matters; the assistant reads each piece, writes it into clear
+pages, links those pages to everything related, and holds the whole thing
+consistent as it grows. You read and ask; it does the filing and cross-linking
+that people always abandon. Every source you add makes the picture richer, and
+the connections are already there the moment you need them. It holds more than
+what you have read: what you are working on lives here too, so what you know and
+what you are doing stay in one place.</p>
+
+<h2>How it works</h2>
+
+<h3>You add something.</h3>
+<p>You hand a source to the assistant and talk about it. Before it writes
+anything, it tells you what it found, so you can catch a misread early. Then it
+writes the ideas into pages, one idea to a page, with the source noted, and
+links them to the related pages you already have. If something new disagrees
+with something you filed before, it flags it for you. Your original is kept
+exactly as it was; the assistant builds on top of your sources and never edits
+them.</p>
+
+<h3>You think out loud.</h3>
+<p>This is the heart of it. Because the assistant has read what you have put
+here, you can talk an idea through at length with something that already holds
+your context, and reading turns into a discussion instead of lonely note-taking.
+Ask a question and it answers from your own collection rather than the open
+internet, showing you the sources behind each answer. A good exchange can be
+saved back as its own page, so your thinking compounds instead of vanishing into
+chat.</p>
+
+<h3>You keep track.</h3>
+<p>Alongside the pages, the assistant keeps one current page of what is live:
+your open questions, the tasks in flight, the decisions you have made. One
+place, not a scatter of lists. Ask for a rundown any time and it reads that page
+back to you, so when you sit down you can see where things stand and what is
+next.</p>
+
+<h3>You keep it healthy.</h3>
+<p>Now and then the assistant checks the whole base for gaps, contradictions,
+and claims that newer sources have overtaken. It proposes those changes for you
+to approve rather than rewriting the meaning of anything on its own. Throughout,
+it keeps a catalog of every page and a dated log of what it did, so nothing is
+lost and you can retrace how the picture changed.</p>
+
+<h2>Why it has to cite everything</h2>
+
+<p>A model is general knowledge with nothing personal in it. Your chat session
+forgets everything when it closes. Your files are long-term memory that nothing
+has been made of yet. This is the layer in between.</p>
+
+<p>Ideas arrive from everywhere: an inbox, a transcript, a blog post, a group
+chat, someone's argument on the internet. Some of them you are examining rather
+than holding. Nothing about an idea marks which is which, so if it enters
+without provenance, that marker is gone and it comes back later as something you
+believe. The citation is not bookkeeping. It is what keeps the voice and the
+force of an idea recognizable as distinct from your own.</p>
+
+<blockquote>How an agent gets information and stores it is what gives it agency.
+Otherwise it is a general model with a very confused memory.</blockquote>
+
+<h2>Who does what</h2>
+
+<p>You decide what is worth keeping and what it all means. The assistant does
+the work nobody keeps up with alone: reading, summarizing, filing, drawing the
+connections, holding everything consistent. That division is the whole idea. An
+ordinary notebook falls out of date because keeping it up is a chore; this stays
+current because that chore now costs you almost nothing.</p>
+
+<p><strong>Cyborg</strong> is short for cybernetic organism, the word the
+Terminator made sound like a threat. Set the killer robots aside. Donna
+Haraway's <em>Cyborg Manifesto</em> recovered the better meaning: a joining of
+human and machine that breaks down the old line between who thinks and what
+merely assists. That is what you become here. You, reading and deciding, joined
+to software that reads tirelessly beside you. It does not replace your thinking,
+because you cannot outsource understanding.</p>
+
+<h2>Start one</h2>
+
+<p>No Python, no terminal. Download the folder, open it, talk to it.</p>
+
+<ol>
+  <li>Download the repo and take out the <code>seed/</code> folder. Rename it to
+      whatever your base should be called.</li>
+  <li>Open it in <a href="https://obsidian.md">Obsidian</a>, which is free. Any
+      Markdown editor works; these are plain text files you own.</li>
+  <li>Point an AI assistant at that folder, one that can read and write files
+      in it.</li>
+  <li>Open <code>START HERE.md</code> and do what it says. The first step is
+      filling in two blank sections of the contract with your assistant: what
+      this base is for, and what it is not for. The second matters more.</li>
+</ol>
+
+<p>Then add three or four sources you already care about and have it process
+one. Watch it tell you what it found before it writes anything. That first loop
+is the proof. Skip git, sync, and everything else on day one.</p>
+
+<div class="cta">
+  <h2>If you build one, send me a slice</h2>
+  <p>Once your base has real material in it, ask your assistant to prepare a
+  bundle: the pages on one topic you care about, the sources behind them, and a
+  catalog, as plain Markdown that drops into anyone else's base. Review it
+  yourself before it leaves. Then send it.</p>
+  <p>That is the part I actually want more of. Two knowledge bases answering
+  each other's questions is the whole thesis, and it needs a third.</p>
+  <a class="btn" href="https://github.com/charlieamadeus/soulvant">Get the seed</a>
+  <a class="btn" href="https://github.com/charlieamadeus/soulvant/issues">Send a bundle</a>
+</div>
+
+<h2>The honest limits</h2>
+
+<p>Soulvant is only as good as what you choose to feed it, so you stay the
+curator. It organizes and connects; the judgment stays yours. It rewards a
+focused collection you return to over time far more than a place where
+everything gets dumped.</p>
+
+<p>Two of these exist and talk to each other so far, and the bundles they traded
+were assembled by hand. That is an observation, not a validation.</p>
+
+<p>Start with a handful of sources and a question you care about. The base grows
+from there, and within weeks you have a living map of what you know and what you
+are working on, with one tireless partner keeping it current.</p>
+
+<footer>
+  Built by <a href="https://github.com/charlieamadeus">Charlie Amadeus</a>.
+  Implements the LLM-wiki pattern, aiming at the
+  <a href="https://github.com/google/open-knowledge-format">Open Knowledge Format</a>
+  where it can. Plain Markdown, yours, portable anywhere.
+</footer>
+
+</div></body></html>
