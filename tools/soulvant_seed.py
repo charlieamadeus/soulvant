@@ -259,7 +259,7 @@ Otherwise it is a general model with a very confused memory.
 1. **Open `CLAUDE.md` and fill in the two blank sections**: what this base is
    for, and what it is not for. Do this with your assistant, out loud. The
    second section matters more than the first.
-2. **Put three or four sources you already care about in `20 - Sources/`.**
+2. **Put three or four sources you already care about in `90 - Inbox/`.**
    An article, a transcript, a chapter, something you wrote.
 3. **Ask the assistant to process one of them.** Watch it tell you what it
    found before it writes anything. Correct it if it misread. Then look at

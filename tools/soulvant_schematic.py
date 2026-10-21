@@ -50,7 +50,6 @@ IDEA_TYPES = [
     ("Brain-Inspired Memory", "The build"),
     ("LLM-wiki Operations", "The build"),
     ("Soulvant", "The build"),
-    ("DeWitt Operational", "The build"),
     ("Eternal Knowledge", "The build"),
 
     ("Consciousness Metaphysics", "Mind"),
