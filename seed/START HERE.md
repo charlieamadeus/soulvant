@@ -16,14 +16,16 @@ Otherwise it is a general model with a very confused memory.
 
 ## Your first day
 
-1. **Open `CLAUDE.md` and fill in the two blank sections**: what this base is
-   for, and what it is not for. Do this with your assistant, out loud. The
-   second section matters more than the first.
+1. **Answer two questions.** The first time your assistant reads `CLAUDE.md`
+   it asks what this base is for and what it is not for, and writes your
+   answers in. A sentence each is enough, and "not decided yet" is allowed.
+   The second answer matters more than the first.
 2. **Put three or four sources you already care about in `90 - Inbox/`.**
    An article, a transcript, a chapter, something you wrote.
 3. **Ask the assistant to process one of them.** Watch it tell you what it
    found before it writes anything. Correct it if it misread. Then look at
-   the pages it produced and the catalog entry it added.
+   the pages it produced and the catalog entry it added. It will ask about
+   the others when it is done with the first.
 4. **Ask it a question** that the source you just added should be able to
    answer, and check that the answer cites it.
 5. **Stop there.** Do not set up git, sync, or anything else on day one. The

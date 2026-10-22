@@ -71,9 +71,9 @@ You need Claude Code or Codex. They come in the desktop apps that come with paid
 1. **Download the ZIP** with the link at the top, and unzip it. On a Mac, double-click it. On Windows, right-click it and choose Extract All.
 2. **Find the folder called `seed`** inside what you unzipped. Move it somewhere you keep your own files, such as Documents, and rename it to whatever you like. That folder is your Soulvant. You can ignore the rest of the download.
 3. **Put three or four files you care about** in its `90 - Inbox` folder: an article, a transcript, notes you wrote.
-4. **Open your Soulvant folder in an agent.** For Claude: install the [Claude desktop app](https://claude.ai/download), sign in, open the Code tab, and choose your Soulvant folder as the folder to work in. For Codex: follow [OpenAI's Codex quickstart](https://learn.chatgpt.com/docs/quickstart) and open your Soulvant folder as the project. Then paste this, with the brackets filled in:
+4. **Open your Soulvant folder in an agent.** For Claude: install the [Claude desktop app](https://claude.ai/download), sign in, open the Code tab, and choose your Soulvant folder as the folder to work in. For Codex: follow [OpenAI's Codex quickstart](https://learn.chatgpt.com/docs/quickstart) and open your Soulvant folder as the project. Then paste this:
 
-> This folder is my new Soulvant, for [one line, or "not decided yet"]. Work only from the files here and what I tell you; ignore what you remember from other chats. Read START HERE.md and CLAUDE.md. Then process one file from 90 - Inbox: tell me in plain words what you found and what you will file, and wait for my OK.
+> This folder is my new Soulvant. Work only from the files here and what I tell you; ignore what you remember from other chats. Read START HERE.md and CLAUDE.md. If the two blank sections in CLAUDE.md are empty, ask me what this is for and what it is NOT for, one question at a time (I may say "not decided yet"), and write my answers in. Then process one file from 90 - Inbox: tell me in plain words what you found and what you will file, and wait for my OK. After that, ask me about the others.
 
 5. **Answer it.** It tells you what it found before it files anything. Say OK, or tell it what it got wrong.
 6. **Ask it something your file can answer.** Ask it to show the source it used, then open that source and check.

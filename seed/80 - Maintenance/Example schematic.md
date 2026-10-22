@@ -1,7 +1,8 @@
 # What this looks like later
 
-A schematic of a working Soulvant, generated from the live base.
-Yours starts empty and grows into a shape like this one.
+An example from another working Soulvant, not yours. It is not filed
+material and not a layout to copy. Yours starts empty and grows into a
+shape like this one.
 
 ```
 ========================================================================

@@ -2,6 +2,12 @@
 
 Read this file at the start of every session, before doing anything else.
 
+On the first read, if the two sections below are still empty, ask the owner
+two questions, one at a time: what this base is for, and what it is NOT for.
+Write each answer in the owner's words. "Not decided yet" is a fine answer;
+write that down as an Open line in `state.md` and ask again after five
+sources. Ask nothing else first.
+
 ## What this base is for
 
 <!-- Owner: replace this. One or two sentences. What decisions or work does
@@ -87,6 +93,65 @@ updated: YYYY-MM-DD
 ---
 ```
 
+## Process one source
+
+Take one file from `90 - Inbox/` at a time.
+
+1. Read it. Say what you found and what you will write, then wait for the
+   owner's OK (rule 3).
+2. Move it into `20 - Sources/`: `Clippings/` for articles and papers,
+   `Conversations/` for chats and transcripts, `Drafts/` for the owner's own
+   writing. Name it `YYYY-MM-DD - Author - Title.md`, using the date it was
+   written, or the date saved if unknown. Author is the owner's name if known,
+   else "Me", for the owner's own writing. Leave the body as it is and add
+   frontmatter above it:
+
+```yaml
+---
+type: source
+description: Article on sourdough starter ratios
+updated: 2026-10-21
+---
+```
+
+   A source may also carry `author:` and `date:`. Add no other keys.
+
+3. Write one atomic note per idea in `10 - Notes/`. The file name is the claim
+   as a sentence, without colons. Link it up to a synthesis page, and cite
+   the source:
+
+```markdown
+---
+type: note
+description: A starter fed equal parts by weight rises on a steady schedule
+updated: 2026-10-21
+---
+A starter fed equal parts flour, water and old starter by weight rises on a
+steady schedule. Part of [[MOC - Sourdough]].
+
+## Sources
+- [[2026-10-20 - Jane Baker - Starter basics]]: says an equal-parts feeding
+  peaks in 4 to 6 hours.
+```
+
+4. If no synthesis page covers the topic, make one in `00 - MOCs/` named
+   `MOC - Topic.md`: a heading, then one line per note.
+
+```markdown
+# MOC - Sourdough
+- [[A starter fed equal parts by weight rises on a steady schedule]]
+```
+
+5. Add each new page to `index.md`, append to `log.md`, and update
+   `state.md` if anything is open or decided. Log the `CLAUDE.md` setup edit as
+   its own line.
+6. Tell the owner what was filed, then ask about the next file. For a first
+   source, this plain summary is the teach-back (rule 9).
+
+The `README.md` in each folder, including `90 - Inbox/`, is a label, not
+material. Leave it alone. When you edit a file, keep its existing line
+endings.
+
 ## The state page
 
 `state.md` holds what is open, in flight, and decided, in one place rather
@@ -95,7 +160,8 @@ than scattered across lists. The assistant maintains it; the owner reads it.
 It carries a priority order, and **the owner can change that order.** The
 useful ordering differs by person: research-shaped work wants open questions
 and contradictions surfaced first, action-shaped work wants the next move.
-Pick one, then retune it once the base has a few weeks of material in it.
+The owner sets it after the first week; leave it blank until then. Retune it
+once the base has a few weeks of material in it.
 
 Ask for a rundown any time and the assistant reads that page back, ordered.
 
