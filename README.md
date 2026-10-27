@@ -1,8 +1,10 @@
 # Soulvant
 
+Shared memory for Claude Code and Codex, kept as plain Markdown files you own. Open the folder in either agent and it picks up where the last one left off. Open it in Obsidian and it is a vault you can browse.
+
 *Say it soul-vant, not solvent. Solutions plus savant: brilliance with soul.*
 
-**[Download Soulvant (ZIP)](https://github.com/charlieamadeus/soulvant/archive/refs/heads/main.zip)**, then follow [Start one](#start-one). You need Claude Code or Codex in its desktop app.
+**[Download Soulvant (ZIP)](https://github.com/charlieamadeus/soulvant/archive/refs/heads/main.zip)**, then follow [Start one](#start-one). You need Claude Code or Codex in its desktop app. There is no MCP server or database to set up. The agent reads and writes the files itself.
 
 Soulvant is a mind you can share, with your agents and the people you work with. It keeps what you've learned, what you've decided, and why, in files you own, so the next agent can see how you got here and help with what comes next.
 
@@ -90,6 +92,7 @@ The full first-day walkthrough is [START HERE](seed/START%20HERE.md), inside the
 
 - [The explainer](https://charlieamadeus.github.io/soulvant/): the whole idea on one page.
 - [What is in this repo, and what the seed leaves out](docs/REFERENCE.md)
+- [How Soulvant compares with MCP memory tools](docs/COMPARE.md)
 - [More reviews](REVIEWS.md)
 
 ## As it grows
