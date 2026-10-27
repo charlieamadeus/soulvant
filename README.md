@@ -73,9 +73,9 @@ You need Claude Code or Codex. They come in the desktop apps that come with paid
 3. **Put three or four files you care about** in its `90 - Inbox` folder: an article, a transcript, notes you wrote.
 4. **Open your Soulvant folder in an agent.** For Claude: install the [Claude desktop app](https://claude.ai/download), sign in, open the Code tab, and choose your Soulvant folder as the folder to work in. For Codex: follow [OpenAI's Codex quickstart](https://learn.chatgpt.com/docs/quickstart) and open your Soulvant folder as the project. Then paste this:
 
-> This folder is my new Soulvant. Work only from the files here and what I tell you; ignore what you remember from other chats. Read START HERE.md and CLAUDE.md. If the two blank sections in CLAUDE.md are empty, ask me what this is for and what it is NOT for, one question at a time (I may say "not decided yet"), and write my answers in. Then process one file from 90 - Inbox: tell me in plain words what you found and what you will file, and wait for my OK. After that, ask me about the others.
+> This folder is my new Soulvant. Work only from the files here and what I tell you; ignore what you remember from other chats. Read START HERE.md and CLAUDE.md. Then process one file from 90 - Inbox: tell me in plain words what you found and what you will file, and wait for my OK. Once it is filed, if the two blank sections in CLAUDE.md are empty, ask me what this is for and what it is NOT for, one question at a time (I may say "not decided yet"), and write my answers in. After that, ask me about the others.
 
-5. **Answer it.** It tells you what it found before it files anything. Say OK, or tell it what it got wrong.
+5. **Answer it.** It tells you what it found before it files anything. Say OK, or tell it what it got wrong. If you only want to talk a file over, say "don't file it" and it leaves the file where it is. After the first file it asks what this Soulvant is for; "not decided yet" is a fine answer.
 6. **Ask it something your file can answer.** Ask it to show the source it used, then open that source and check.
 
 To browse the pages yourself, open the folder in [Obsidian](https://obsidian.md) (free) as a vault. Any text editor works too; these are plain text files.

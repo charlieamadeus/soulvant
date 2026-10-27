@@ -16,4 +16,4 @@ which material is in use and which has gone quiet.
 
 - Folder skeleton, operating contract, index, log, and state page created.
 - Owner has not yet filled in the purpose and out-of-scope sections of the
-  contract. That is the first real step.
+  contract. The assistant asks for them after the first source is filed.

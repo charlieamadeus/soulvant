@@ -39,11 +39,13 @@ CONTRACT = """# Operating contract
 
 Read this file at the start of every session, before doing anything else.
 
-On the first read, if the two sections below are still empty, ask the owner
-two questions, one at a time: what this base is for, and what it is NOT for.
+On the first read, if the two sections below are still empty, process the
+first file in `90 - Inbox/` before anything else (see Process one source).
+Once it is filed, ask the owner two questions, one at a time: what this base
+is for, and what it is NOT for. If the Inbox is empty, ask them first.
 Write each answer in the owner's words. "Not decided yet" is a fine answer;
 write that down as an Open line in `state.md` and ask again after five
-sources. Ask nothing else first.
+sources.
 
 ## What this base is for
 
@@ -135,7 +137,9 @@ updated: YYYY-MM-DD
 Take one file from `90 - Inbox/` at a time.
 
 1. Read it. Say what you found and what you will write, then wait for the
-   owner's OK (rule 3).
+   owner's OK (rule 3). If the owner only wants to read or talk it over, do
+   that and file nothing: leave the file in `90 - Inbox/` until they say to
+   file it.
 2. Move it into `20 - Sources/`: `Clippings/` for articles and papers,
    `Conversations/` for chats and transcripts, `Drafts/` for the owner's own
    writing. Name it `YYYY-MM-DD - Author - Title.md`, using the date it was
@@ -183,7 +187,9 @@ steady schedule. Part of [[MOC - Sourdough]].
    `state.md` if anything is open or decided. Log the `CLAUDE.md` setup edit as
    its own line.
 6. Tell the owner what was filed, then ask about the next file. For a first
-   source, this plain summary is the teach-back (rule 9).
+   source, this plain summary is the teach-back (rule 9). If the owner says
+   to do the rest, list what each remaining file holds, wait for one OK for
+   the list, then file them one at a time.
 
 The `README.md` in each folder, including `90 - Inbox/`, is a label, not
 material. Leave it alone. When you edit a file, keep its existing line
@@ -267,7 +273,7 @@ which material is in use and which has gone quiet.
 
 - Folder skeleton, operating contract, index, log, and state page created.
 - Owner has not yet filled in the purpose and out-of-scope sections of the
-  contract. That is the first real step.
+  contract. The assistant asks for them after the first source is filed.
 """
 
 STATE = """---
@@ -322,16 +328,16 @@ Otherwise it is a general model with a very confused memory.
 
 ## Your first day
 
-1. **Answer two questions.** The first time your assistant reads `CLAUDE.md`
-   it asks what this base is for and what it is not for, and writes your
-   answers in. A sentence each is enough, and "not decided yet" is allowed.
-   The second answer matters more than the first.
-2. **Put three or four sources you already care about in `90 - Inbox/`.**
+1. **Put three or four sources you already care about in `90 - Inbox/`.**
    An article, a transcript, a chapter, something you wrote.
-3. **Ask the assistant to process one of them.** Watch it tell you what it
-   found before it writes anything. Correct it if it misread. Then look at
-   the pages it produced and the catalog entry it added. It will ask about
-   the others when it is done with the first.
+2. **Ask the assistant to process one of them.** Watch it tell you what it
+   found before it writes anything. Correct it if it misread. If you only
+   want to talk a file over, say so and it files nothing. Then look at the
+   pages it produced and the catalog entry it added.
+3. **Answer two questions.** After the first file, your assistant asks what
+   this base is for and what it is not for, and writes your answers in. A
+   sentence each is enough, and "not decided yet" is allowed. The second
+   answer matters more than the first. Then it asks about the other files.
 4. **Ask it a question** that the source you just added should be able to
    answer, and check that the answer cites it.
 5. **Stop there.** Do not set up git, sync, or anything else on day one. The
