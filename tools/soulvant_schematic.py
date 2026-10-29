@@ -1,15 +1,17 @@
 #!/usr/bin/env python3
 """Emit an ASCII schematic of a Soulvant's state and pipelines.
 
-Reads the live vault and prints a diagram suitable for a terminal, a slide,
-or the About page of a seed bundle. ASCII only, no box-drawing characters,
-so it survives every codepage and every agent that reads it back.
+Reads a base and prints a diagram suitable for a terminal, a slide, or the
+About page of a seed bundle. ASCII only, no box-drawing characters, so it
+survives every codepage and every agent that reads it back.
 
 Usage:
-    py -3 scripts/soulvant_schematic.py                 # full schematic
-    py -3 scripts/soulvant_schematic.py --section tiers # one section
-    py -3 scripts/soulvant_schematic.py --vault PATH    # another Soulvant
-    py -3 scripts/soulvant_schematic.py --width 78
+    python3 tools/soulvant_schematic.py                 # this folder's base
+    python3 tools/soulvant_schematic.py --section tiers # one section
+    python3 tools/soulvant_schematic.py --vault PATH    # another base
+    python3 tools/soulvant_schematic.py --width 78
+
+On Windows, use py instead of python3.
 
 Sections: tiers, layers, ideas, pipelines.
 """
@@ -20,70 +22,7 @@ import os
 import re
 import sys
 
-# MOC name fragment -> idea type. First match wins, so order matters:
-# specific names must precede the substrings that would also catch them.
-IDEA_TYPES = [
-    ("Client AI and Knowledge Systems", "Client work"),
-    ("Client Infrastructure Delivery", "Client work"),
-    ("Client Service Design", "Client work"),
-    ("Client Infrastructure Work", "Client work"),
-    ("LLM-wiki Deployment", "Client work"),
-    ("AI-Native Firm", "Client work"),
-
-    ("AI Markets and Compute", "AI industry"),
-    ("AI Political Economy", "AI industry"),
-    ("AI Product Strategy", "AI industry"),
-    ("AI Market and Business", "AI industry"),
-
-    ("Agent Evaluation", "Agent engineering"),
-    ("Agent Security", "Agent engineering"),
-    ("Agentic Engineering", "Agent engineering"),
-    ("AI Architecture and Post-LLM", "Agent engineering"),
-    ("Coding-Agent Practice", "Agent engineering"),
-    ("Prompt Engineering", "Agent engineering"),
-    ("Fiduciary Agents", "Agent engineering"),
-
-    ("Personal Agent Architecture", "The build"),
-    ("Personal Agent Identity", "The build"),
-    ("Personal Agent Intelligence", "The build"),
-    ("Personal AI Memory", "The build"),
-    ("Brain-Inspired Memory", "The build"),
-    ("LLM-wiki Operations", "The build"),
-    ("Soulvant", "The build"),
-    ("Eternal Knowledge", "The build"),
-
-    ("Consciousness Metaphysics", "Mind"),
-    ("Machine Consciousness", "Mind"),
-    ("AI Consciousness", "Mind"),
-    ("AI Moral Status", "Mind"),
-    ("Determinism and Agency", "Mind"),
-    ("Relational Process-Pattern", "Mind"),
-
-    ("Constrained and Unconstrained", "Political economy"),
-    ("Economic Methodology", "Political economy"),
-    ("Utopian Practice", "Political economy"),
-    ("Earthseed", "Political economy"),
-
-    ("Language and Thought", "Language and craft"),
-    ("Language as Instrument", "Language and craft"),
-    ("Creative Practice", "Language and craft"),
-
-    ("Family Wealth", "Life"),
-    ("Family and Relationships", "Life"),
-    ("Health and Lifestyle", "Life"),
-    ("Contemplative Practice", "Life"),
-]
-
-TYPE_ORDER = [
-    "The build",
-    "Client work",
-    "Agent engineering",
-    "AI industry",
-    "Mind",
-    "Political economy",
-    "Language and craft",
-    "Life",
-]
+TOP_TOPICS = 12
 
 
 def find(vault, pattern):
@@ -106,81 +45,68 @@ def read_text(path):
         return fh.read()
 
 
-def classify(moc_name):
-    for fragment, idea in IDEA_TYPES:
-        if fragment.lower() in moc_name.lower():
-            return idea
-    return "Unclassified"
+def topic_name(moc_name):
+    if moc_name.startswith("MOC - "):
+        return moc_name[len("MOC - "):]
+    return moc_name
 
 
-LINKS_UP = re.compile(r"^##+\s*Links up\s*$", re.I)
 WIKILINK = re.compile(r"\[\[([^\]|#]+)")
 
 
+def open_items(state_text):
+    """Count the '- ' lines under the '## Open' heading of state.md."""
+    count, inside = 0, False
+    for line in state_text.splitlines():
+        if line.startswith("#"):
+            inside = line.strip() == "## Open"
+            continue
+        if inside and line.startswith("- "):
+            count += 1
+    return count
+
+
 def survey(vault):
-    """Walk the vault once and return every number the schematic needs."""
+    """Walk the base once and return every number the schematic needs."""
     moc_dir = find(vault, "00*MOCs")
     note_dir = find(vault, "10*Notes")
 
-    mocs = {}
+    # Each MOC file is its own topic. A folder README is a label, not a MOC.
+    mocs = []
     if moc_dir:
         for name in sorted(os.listdir(moc_dir)):
-            if name.endswith(".md"):
-                mocs[name[:-3]] = classify(name[:-3])
+            if name.endswith(".md") and name.lower() != "readme.md":
+                mocs.append(name[:-3])
+    by_key = {m.lower(): m for m in mocs}
 
-    # Attribute each note to the idea types of the MOCs it links up to.
-    by_type = {t: 0 for t in TYPE_ORDER}
-    by_type["Unclassified"] = 0
+    # A note counts toward each MOC it wikilinks anywhere in its text.
+    by_moc = {m: 0 for m in mocs}
     orphans = 0
     notes = 0
 
     if note_dir:
         for dirpath, _, files in os.walk(note_dir):
             for fname in files:
-                if not fname.endswith(".md"):
+                if not fname.endswith(".md") or fname.lower() == "readme.md":
                     continue
                 notes += 1
                 text = read_text(os.path.join(dirpath, fname))
-                lines = text.splitlines()
-                targets, capturing = [], False
-                for line in lines:
-                    if line.startswith("#"):
-                        capturing = bool(LINKS_UP.match(line.strip()))
-                        continue
-                    if capturing:
-                        targets.extend(WIKILINK.findall(line))
-                # Fall back to any MOC wikilink anywhere in the page.
-                if not targets:
-                    targets = [t for t in WIKILINK.findall(text)
-                               if t.strip().upper().startswith("MOC")]
                 seen = set()
-                for raw in targets:
+                for raw in WIKILINK.findall(text):
                     key = raw.strip().split("/")[-1]
-                    idea = mocs.get(key)
-                    if idea is None:
-                        for moc_name, moc_idea in mocs.items():
-                            if moc_name.lower() == key.lower():
-                                idea = moc_idea
-                                break
-                    if idea and idea not in seen:
-                        seen.add(idea)
-                        by_type[idea] = by_type.get(idea, 0) + 1
+                    if key.lower().endswith(".md"):
+                        key = key[:-3]
+                    moc = by_key.get(key.lower())
+                    if moc and moc not in seen:
+                        seen.add(moc)
+                        by_moc[moc] += 1
                 if not seen:
                     orphans += 1
-
-    moc_counts = {t: 0 for t in TYPE_ORDER}
-    moc_counts["Unclassified"] = 0
-    for idea in mocs.values():
-        moc_counts[idea] = moc_counts.get(idea, 0) + 1
 
     log_text = read_text(find(vault, "log.md"))
     log_entries = len(re.findall(r"^## \[", log_text, re.M))
 
-    # A Ledger data row opens with an id cell: lowercase, digits, hyphens.
-    ledger_text = read_text(find(vault, "80*Maintenance/Ledger.md"))
-    row_id = re.compile(r"^\|\s*`?([a-z0-9][a-z0-9-]*)`?\s*\|")
-    ledger_rows = len([l for l in ledger_text.splitlines()
-                       if l.count("|") >= 8 and row_id.match(l)])
+    state_open = open_items(read_text(find(vault, "state.md")))
 
     return {
         "sources": count_md(vault, "20*Sources"),
@@ -189,9 +115,8 @@ def survey(vault):
         "projects": count_md(vault, "30*Projects"),
         "people": count_md(vault, "40*People"),
         "log_entries": log_entries,
-        "ledger_rows": ledger_rows,
-        "by_type": by_type,
-        "moc_counts": moc_counts,
+        "state_open": state_open,
+        "by_moc": by_moc,
         "orphans": orphans,
     }
 
@@ -228,7 +153,7 @@ def section_layers(s, width):
         ("00 MOCs", s["mocs"], "synthesis per topic, the navigable layer"),
         ("30 Projects", s["projects"], "what is being built"),
         ("40 People", s["people"], "recurring actors, bi-temporal"),
-        ("Ledger", s["ledger_rows"], "the action layer: one row per live thread"),
+        ("state.md", s["state_open"], "what is open, in flight, and decided"),
         ("log.md", s["log_entries"], "append-only record of what changed and why"),
     ]
     out = ["LAYERS", ""]
@@ -244,23 +169,27 @@ def section_layers(s, width):
 
 
 def section_ideas(s, width):
-    out = ["IDEA TYPES", "",
-           "  %-20s %5s %7s" % ("", "MOCs", "notes")]
-    total_m = total_n = 0
-    for t in TYPE_ORDER + ["Unclassified"]:
-        m = s["moc_counts"].get(t, 0)
-        n = s["by_type"].get(t, 0)
-        if m == 0 and n == 0:
-            continue
-        total_m += m
-        total_n += n
-        bar = "#" * max(1, round(n / max(1, max(s["by_type"].values())) * 28))
-        out.append("  %-20s %5d %7d  %s" % (t, m, n, bar))
-    out.append("  %-20s %5d %7d" % ("", total_m, total_n))
+    out = ["TOPICS", ""]
+    ranked = sorted(s["by_moc"].items(), key=lambda kv: (-kv[1], kv[0].lower()))
+    if not ranked:
+        out.append("  No MOCs yet. Each MOC in 00 - MOCs/ becomes a row here.")
+    else:
+        shown, rest = ranked[:TOP_TOPICS], ranked[TOP_TOPICS:]
+        rows = [(topic_name(m)[:28], n) for m, n in shown]
+        if rest:
+            rows.append(("Other (%d MOCs)" % len(rest), sum(n for _, n in rest)))
+        peak = max(1, max(n for _, n in rows))
+        out.append("  %-28s %7s" % ("", "notes"))
+        total_n = 0
+        for name, n in rows:
+            total_n += n
+            bar = "#" * max(1, round(n / peak * 28)) if n else ""
+            out.append(("  %-28s %7d  %s" % (name, n, bar)).rstrip())
+        out.append("  %-28s %7d" % ("", total_n))
     out += [
         "",
-        "  A note counts once per idea type it links up to, so the total",
-        "  exceeds the note count where a page bridges two domains.",
+        "  A note counts once per MOC it links, so the total exceeds",
+        "  the note count where a page links two topics.",
         "  Unlinked notes: %d." % s["orphans"],
     ]
     return out
@@ -278,7 +207,7 @@ def section_pipelines(s, width):
         "                |",
         "     +----------+----------+-----------+",
         "     v          v          v           v",
-        "  sources     notes      MOCs       Ledger",
+        "  sources     notes      MOCs       state",
         "  (frozen)   (cited)  (synthesis)  (what is live)",
         "     |          |          |           |",
         "     +----------+----+-----+-----------+",
@@ -324,8 +253,8 @@ def render(vault, which, width, title=None):
 def main():
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--vault", default=os.path.join(os.path.dirname(__file__), ".."),
-                    help="vault root (default: the repo this script lives in)")
+    ap.add_argument("--vault", default=".",
+                    help="base root (default: the current folder)")
     ap.add_argument("--section", choices=sorted(SECTIONS), default=None)
     ap.add_argument("--width", type=int, default=72)
     ap.add_argument("--title", default=None)

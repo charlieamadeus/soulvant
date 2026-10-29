@@ -8,12 +8,11 @@ typography rules, prose watchlists, decay scoring, a specific ledger schema,
 a named agent roster. A new owner should set their own equivalents, or none.
 
 Usage:
-    py -3 scripts/soulvant_seed.py --out "C:/path/Soulvant Seed"
-    py -3 scripts/soulvant_seed.py --out ./seed --zip
-    py -3 scripts/soulvant_seed.py --out ./seed --owner "Ada Lovelace"
+    python3 tools/soulvant_seed.py --out "./Soulvant Seed"
+    python3 tools/soulvant_seed.py --out ./seed --zip
+    python3 tools/soulvant_seed.py --out ./seed --owner "Ada Lovelace"
 
-Add --schematic to embed a generated schematic of THIS vault as an example
-of what the pattern looks like once it has been running for a while.
+On Windows, use py instead of python3.
 """
 
 import argparse
@@ -365,7 +364,7 @@ def write(path, text):
         fh.write(text)
 
 
-def build(out, owner, date, schematic_from=None):
+def build(out, owner, date):
     if os.path.exists(out) and os.listdir(out):
         sys.exit("refusing to write into a non-empty directory: %s" % out)
 
@@ -387,17 +386,6 @@ def build(out, owner, date, schematic_from=None):
     write(os.path.join(out, "state.md"), STATE.format(date=date))
     write(os.path.join(out, "START HERE.md"), START_HERE)
 
-    if schematic_from:
-        sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-        import soulvant_schematic as sch
-        text = sch.render(schematic_from, None, 72, title="an example, after 3 months")
-        write(os.path.join(out, "80 - Maintenance", "Example schematic.md"),
-              "# What this looks like later\n\n"
-              "An example from another working Soulvant, not yours. It is not filed\n"
-              "material and not a layout to copy. Yours starts empty and grows into a\n"
-              "shape like this one.\n\n"
-              "```\n" + text + "\n```\n")
-
     return out
 
 
@@ -407,15 +395,12 @@ def main():
     ap.add_argument("--out", required=True, help="directory to create the seed in")
     ap.add_argument("--owner", default=None)
     ap.add_argument("--zip", action="store_true", help="also produce a .zip beside it")
-    ap.add_argument("--schematic", action="store_true",
-                    help="embed a schematic of this vault as an example")
-    ap.add_argument("--vault", default=os.path.join(os.path.dirname(__file__), ".."))
     ap.add_argument("--date", default=None)
     args = ap.parse_args()
 
     date = args.date or datetime.date.today().isoformat()
     out = os.path.abspath(args.out)
-    build(out, args.owner, date, args.vault if args.schematic else None)
+    build(out, args.owner, date)
 
     files = sum(len(f) for _, _, f in os.walk(out))
     print("seed written to %s (%d files)" % (out, files))
