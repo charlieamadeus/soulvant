@@ -185,6 +185,10 @@ steady schedule. Part of [[MOC - Sourdough]].
 5. Add each new page to `index.md`, append to `log.md`, and update
    `state.md` if anything is open or decided. Log the `CLAUDE.md` setup edit as
    its own line.
+   Before reporting the filing, reopen the saved source, catalog, and state.
+   Check the source body against the original, including its line endings.
+   Find each new page in the catalog and each new decision or open item in
+   state. Correct a missing entry before saying it was filed.
 6. Tell the owner what was filed, then ask about the next file. For a first
    source, this plain summary is the teach-back (rule 9). If the owner says
    to do the rest, list what each remaining file holds, wait for one OK for
