@@ -111,4 +111,4 @@ Two knowledge bases answering each other's questions is the whole thesis. It nee
 
 ## Prior art and license
 
-This implements the [LLM-wiki pattern](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f) and aims at the [Open Knowledge Format](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md), so a Soulvant is plain Markdown you own and can move anywhere. MIT for the tools and the seed. Whatever you write into your own Soulvant is yours.
+This implements the [LLM-wiki pattern](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f) and aims at the [Open Knowledge Format](https://github.com/open-knowledge-format/open-knowledge-format/blob/main/SPEC.md), so a Soulvant is plain Markdown you own and can move anywhere. MIT for the tools and the seed. Whatever you write into your own Soulvant is yours.
